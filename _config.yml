@@ -5,9 +5,8 @@ permalink:           pretty
 relative_permalinks: true
 
 # Setup
-title:               Poole
-tagline:             The Jekyll Butler
-url:                 http://getpoole.com
+title:               S Jiang
+url:                 http://ejiang.github.io
 paginate:            1
 baseurl:             ""
 
@@ -20,11 +19,7 @@ sass:
 
 # About/contact
 author:
-  name:              Mark Otto
-  url:               https://twitter.com/mdo
-  email:             markdotto@gmail.com
+  name:              S Jiang
 
 # Custom vars
-version:             2.0.0
-github:
-  repo:              https://github.com/poole/poole
+github:		     ejiang
