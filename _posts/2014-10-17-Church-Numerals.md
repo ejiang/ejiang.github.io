@@ -32,7 +32,7 @@ is a function such that:
 
 So what is one then, in this system? Following the logic of zero, one would be a function such that:
 
- - input: some argument f
+ - input: some one argument f
  - output: some function that takes in x and outputs (f x)
 
 In code, then:
@@ -62,22 +62,22 @@ Three, for the next part:
       (f (f (f z))))))
 {% endhighlight %}
 
-However, we can't just type this for every single number. We want to add together numbers.
-But we can't just do (two three) to add, because that gives us:
+However, we can't just type this out explicitly for every single number. We want to add together numbers.
+But we can't just do (two (three f)) to add, because that gives us:
 
 {% highlight scheme %}
-(two three)
+(two (three f))
 
-(lambda (x) (three (three x)))
+(lambda (x) ((three f) ((three f) x)))
 
-(lambda (x) (three (lambda (z) (x (x (x z)))))) ; evaluate innermost first
+(lambda (x) (three (f (f (f x)))))
+(lambda (x) (f (f (f (f (f (f x)))))))
 
 {% endhighlight %}
 
-We run into a type error first of all, but even if we could somehow compose them, we would actually
-be getting 6 applications instead of 5, because we would be multiplying rather than adding.
+So we would end up multiplying instead of adding.
 
-So we take a look at add-1. The result of (add-1 n) takes in a number x and applies f one more time
+So we take a look at add-1 (as defined above). The result of (add-1 n) takes in a number x and applies f one more time
 after applying f n times on x. Recall that (n f) is the equivalent of f^(n) in mathematics. So in
 more familiar notation, f(f^n(x)) = f^(n+1)(x).
 
