@@ -68,4 +68,6 @@ theme: light
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repository: https://github.com/ejiang/ejiang.github.io.git
+  branch: master
