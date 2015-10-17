@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Church Numerals | My Blog</title>
+  <meta name="author" content="S Jiang">
+  
+  <meta name="description" content="Church numerals appear in SICP 2.6. Here I attempt an explanation.
+Original2.6link1234(define zero (lambda (f) (lambda (x) x)))(define (add-1 n)  (lam">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Church Numerals"/>
+  <meta property="og:site_name" content="My Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="My Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">My Blog</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-15T01:16:13.000Z"><a href="/Church-Numerals/">2015-10-14</a></time>
+      
+      
+  
+    <h1 class="title">Church Numerals</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Church numerals appear in SICP 2.6. Here I attempt an explanation.</p>
+<h2 id="Original">Original</h2><figure class="highlight scheme"><figcaption><span>2.6</span><a href="https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-14.html#%_thm_2.6" target="_blank" rel="external">link</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">(<span class="keyword"><span class="built_in">define</span></span> zero <span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">f</span>)</span> <span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">x</span>)</span> x)</span>)</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="list">(<span class="keyword"><span class="built_in">define</span></span> <span class="list">(<span class="keyword">add-1</span> n)</span></span><br><span class="line">  <span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">f</span>)</span> <span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">x</span>)</span> <span class="list">(<span class="keyword">f</span> <span class="list">(<span class="list">(<span class="keyword">n</span> f)</span> x)</span>)</span>)</span>)</span>)</span></span><br></pre></td></tr></table></figure>
+<h2 id="Explanation">Explanation</h2><p>Church numerals are a way of encoding the natural numbers into lambdas. It’s an alternative<br>representation of the natural numbers that doesn’t rely on having them defined by the programming<br>language. We can use Church encoding to see the power of lambdas.</p>
+<h2 id="Zero">Zero</h2><p>Numbers in this system are represented as how many times a function f is applied. So zero then<br>is a function such that:</p>
+<ul>
+<li>input: some one argument f</li>
+<li>output: some function that takes in an x and outputs x (so whatever f you pass in doesn’t matter,<br> since it’s applied 0 times)</li>
+</ul>
+<p>So what is one then, in this system? Following the logic of zero, one would be a function such that:</p>
+<ul>
+<li>input: some argument f</li>
+<li>output: some function that takes in x and outputs (f x)</li>
+</ul>
+<p>In code, then:</p>
+<figure class="highlight scheme"><figcaption><span>one</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">(<span class="keyword"><span class="built_in">define</span></span> one</span><br><span class="line">  <span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">f</span>)</span></span><br><span class="line">    <span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">x</span>)</span></span><br><span class="line">      <span class="list">(<span class="keyword">f</span> x)</span>)</span>)</span>)</span></span><br></pre></td></tr></table></figure>
+<p>Two, then follows:</p>
+<figure class="highlight scheme"><figcaption><span>two</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">(<span class="keyword"><span class="built_in">define</span></span> two</span><br><span class="line">  <span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">f</span>)</span></span><br><span class="line">    <span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">y</span>)</span></span><br><span class="line">      <span class="list">(<span class="keyword">f</span> <span class="list">(<span class="keyword">f</span> y)</span>)</span>)</span>)</span>)</span></span><br></pre></td></tr></table></figure>
+<p>Three, for the next part:</p>
+<figure class="highlight scheme"><figcaption><span>three</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">(<span class="keyword"><span class="built_in">define</span></span> three</span><br><span class="line">  <span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">f</span>)</span></span><br><span class="line">    <span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">z</span>)</span></span><br><span class="line">      <span class="list">(<span class="keyword">f</span> <span class="list">(<span class="keyword">f</span> <span class="list">(<span class="keyword">f</span> z)</span>)</span>)</span>)</span>)</span>)</span></span><br></pre></td></tr></table></figure>
+<p>However, we can’t just type this for every single number. We want to add together numbers.<br>But we can’t just do (two three) to add, because that gives us:</p>
+<figure class="highlight scheme"><figcaption><span>three</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">(<span class="keyword">two</span> three)</span></span><br><span class="line"></span><br><span class="line"><span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">x</span>)</span> <span class="list">(<span class="keyword">three</span> <span class="list">(<span class="keyword">three</span> x)</span>)</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">x</span>)</span> <span class="list">(<span class="keyword">three</span> <span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">z</span>)</span> <span class="list">(<span class="keyword">x</span> <span class="list">(<span class="keyword">x</span> <span class="list">(<span class="keyword">x</span> z)</span>)</span>)</span>)</span>)</span>)</span> <span class="comment">; evaluate innermost first</span></span><br></pre></td></tr></table></figure>
+<p>We run into a type error first of all, but even if we could somehow compose them, we would actually<br>be getting 6 applications instead of 5, because we would be multiplying rather than adding.</p>
+<p>So we take a look at add-1. The result of (add-1 n) takes in a number x and applies f one more time<br>after applying f n times on x. Recall that (n f) is the equivalent of f^(n) in mathematics. So in<br>more familiar notation, f(f^n(x)) = f^(n+1)(x).</p>
+<p>Now the final question asks, we want a definition of addition in this system. We want to add<br>m and n. So in familiar notation f^m(f^n(x)) = f^(m+n)(x).</p>
+<p>So, we have a generic add:</p>
+<figure class="highlight scheme"><figcaption><span>add</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">(<span class="keyword"><span class="built_in">define</span></span> <span class="list">(<span class="keyword">add</span> m n)</span></span><br><span class="line">  <span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">f</span>)</span></span><br><span class="line">    <span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">x</span>)</span></span><br><span class="line">      <span class="list">(<span class="list">(<span class="keyword">m</span> f)</span> <span class="list">(<span class="list">(<span class="keyword">n</span> f)</span> x)</span>)</span>)</span>)</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="list">(<span class="list">(<span class="list">(<span class="keyword">add</span> two three)</span> <span class="list">(<span class="keyword"><span class="built_in">lambda</span></span> <span class="list">(<span class="keyword">x</span>)</span> <span class="list">(<span class="keyword"><span class="built_in">+</span></span> <span class="number">1</span> x)</span>)</span>)</span> <span class="number">0</span>)</span></span><br><span class="line"><span class="comment">; 5</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/church-numeral/">church_numeral</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 S Jiang
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
