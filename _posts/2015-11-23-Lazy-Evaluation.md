@@ -211,6 +211,11 @@ interpreters. Lazy does better if you have some slow arguments to a procedure th
 follow any of the 3 rules. Analyzing does better if you have many recursive calls because
 lazy still follows the regular parsing of mceval.
 
+# Practical Tips
+
+ - Count applications of the rules if you're confused regarding set!s. That is,
+   you can keep tabs on "rule 1 is applied twice, rule 2 is applied once" etc.
+
 ## Sources
 
  - SICP
