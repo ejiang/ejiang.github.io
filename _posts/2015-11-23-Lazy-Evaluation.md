@@ -11,6 +11,8 @@ bolded every time mentioned for clarity.
 First, we take a look at the lazy evaluator to understand what occurs.
 This assumes an understanding of MCE.
 
+Foo bar.
+
 ## From 10000 feet
 
 At its heart, a Scheme interpreter is just doing a huge **expansion** (ignore set! and such for
