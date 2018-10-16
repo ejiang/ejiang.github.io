@@ -1,33 +1,72 @@
----
-layout: default
-title: Home
----
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anthony Jiang</title>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+    <style type="text/css">
+        ul li {
+            list-style-type: none;
+            line-height: 2em;
+        }
+        ul {
+            padding-left: 0;
+        }
+        body {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            background-color: #19d691;
+        }
+        a {
+            text-decoration: underline;
+            color: white;
+        }
+        a:visited {
+            color: white;
+        }
+        #part1 {
+            position: absolute;
+            width: 50%;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+        #part2 {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            background-color: white;
+            color: black;
+        }
+        .cent {
+            position: absolute;
+            top: 40%;
+            width: 80%;
+            left: 20%;
+        }
+    </style>
+</head>
+<body>
+    <div id="part1">
+        <div class="cent">
+            <h2>Anthony Jiang</h2>
+        <ul>
+            <li><a href="resume.pdf">Resume</a></li>
+            <li><a href="https://www.linkedin.com/in/tjiang2/">LinkedIn</a></li>
+        </ul>
+        </div>
+    </div>
 
-<div class="posts">
-  {% for post in paginator.posts %}
-  <article class="post">
-    <h1 class="post-title">
-      <a href="{{ site.baseurl }}{{ post.url }}">
-        {{ post.title }}
-      </a>
-    </h1>
 
-    <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">{{ post.date | date_to_string }}</time>
-
-    {{ post.content }}
-  </article>
-  {% endfor %}
-</div>
-
-<div class="pagination">
-  {% if paginator.next_page %}
-    <a class="pagination-item older" href="{{ paginator.next_page_path | prepend: site.baseurl }}">Older</a>
-  {% else %}
-    <span class="pagination-item older">Older</span>
-  {% endif %}
-  {% if paginator.previous_page %}
-    <a class="pagination-item newer" href="{{ paginator.previous_page_path | prepend: site.baseurl }}">Newer</a>
-  {% else %}
-    <span class="pagination-item newer">Newer</span>
-  {% endif %}
-</div>
+    <div id="part2">
+        <div class="cent">
+        <h3>Visit Tracker</h3>
+        <p>
+            <a href='https://play.google.com/store/apps/details?id=io.github.ejiang.visittracker&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' width="50%" src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
+            <div style="position:relative;height:0;padding-bottom:56.25%"><iframe src="https://www.youtube.com/embed/RTK2eBhN5tg?ecver=2" width="640" height="360" frameborder="0" allow="autoplay; encrypted-media" style="position:absolute;width:50%;height:50%;left:0" allowfullscreen></iframe></div>
+        </p>
+        </div>
+    </div>
+</body>
+</html>
